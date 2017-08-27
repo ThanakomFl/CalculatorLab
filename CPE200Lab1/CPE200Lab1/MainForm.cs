@@ -57,6 +57,7 @@ namespace CPE200Lab1
             if (twotime)
             {
                 lblDisplay.Text = "0";
+                twotime = false;
             }
             if(lblDisplay.Text.Length is 8)
             {
@@ -92,21 +93,32 @@ namespace CPE200Lab1
                 return;
             }
             operate = ((Button)sender).Text;
+            firstOperand = lblDisplay.Text;
             switch (operate)
             {
                 case "+":
                 case "-":
-                case "X":
+                case "x":
+                case "1/x":
+                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
+                    break;
+                case "√":
+                    lblDisplay.Text = engine.calculate(operate,firstOperand,"0");
+                    break;
                 case "÷":
-                    firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
                     break;
                 case "%":
-                    // your code here
-                    break;
+                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
+                    break;              
             }
             isAllowBack = false;
             twotime = true;
+            if (operate == "√" || operate == "%" || operate == "1/x")
+            {
+                twotime = false;
+                isAfterEqual = true;
+            }
         }
 
         private void btnEqual_Click(object sender, EventArgs e)
