@@ -322,6 +322,7 @@
             this.MCBtn.TabIndex = 21;
             this.MCBtn.Text = "MC";
             this.MCBtn.UseVisualStyleBackColor = true;
+            this.MCBtn.Click += new System.EventHandler(this.btnmemory_Click);
             // 
             // MRBtn
             // 
@@ -333,6 +334,7 @@
             this.MRBtn.TabIndex = 23;
             this.MRBtn.Text = "MR";
             this.MRBtn.UseVisualStyleBackColor = true;
+            this.MRBtn.Click += new System.EventHandler(this.btnmemory_Click);
             // 
             // MSbtn
             // 
@@ -344,6 +346,7 @@
             this.MSbtn.TabIndex = 24;
             this.MSbtn.Text = "MS";
             this.MSbtn.UseVisualStyleBackColor = true;
+            this.MSbtn.Click += new System.EventHandler(this.btnmemory_Click);
             // 
             // MpBtn
             // 
@@ -355,6 +358,7 @@
             this.MpBtn.TabIndex = 25;
             this.MpBtn.Text = "M+";
             this.MpBtn.UseVisualStyleBackColor = true;
+            this.MpBtn.Click += new System.EventHandler(this.btnmemory_Click);
             // 
             // button1
             // 
@@ -364,8 +368,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 79);
             this.button1.TabIndex = 26;
-            this.button1.Text = "M+";
+            this.button1.Text = "M-";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnmemory_Click);
             // 
             // SqrtBtn
             // 

@@ -20,6 +20,7 @@ namespace CPE200Lab1
         private string firstOperand;
         private string operate;
         private CalculatorEngine engine;
+        private double memories;
 
         private void resetAll()
         {
@@ -56,13 +57,13 @@ namespace CPE200Lab1
             {
                 lblDisplay.Text = "0";
             }
-            if(lblDisplay.Text.Length is 8)
+            if (lblDisplay.Text.Length is 8)
             {
                 return;
             }
             isAllowBack = true;
             string digit = ((Button)sender).Text;
-            if(lblDisplay.Text is "0")
+            if (lblDisplay.Text is "0")
             {
                 lblDisplay.Text = "";
             }
@@ -104,14 +105,14 @@ namespace CPE200Lab1
                     lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
                     break;
                 case "√":
-                    lblDisplay.Text = engine.calculate(operate,firstOperand,"0");
+                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
                     break;
                 case "÷":
                     isAfterOperater = true;
                     break;
                 case "%":
                     lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
-                    break;              
+                    break;
             }
             isAllowBack = false;
             if (operate == "√" || operate == "%" || operate == "1/x")
@@ -177,10 +178,11 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if(lblDisplay.Text[0] is '-')
+            if (lblDisplay.Text[0] is '-')
             {
                 lblDisplay.Text = lblDisplay.Text.Substring(1, lblDisplay.Text.Length - 1);
-            } else
+            }
+            else
             {
                 lblDisplay.Text = "-" + lblDisplay.Text;
             }
@@ -205,20 +207,43 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if(lblDisplay.Text != "0")
+            if (lblDisplay.Text != "0")
             {
                 string current = lblDisplay.Text;
                 char rightMost = current[current.Length - 1];
-                if(rightMost is '.')
+                if (rightMost is '.')
                 {
                     hasDot = false;
                 }
                 lblDisplay.Text = current.Substring(0, current.Length - 1);
-                if(lblDisplay.Text is "" || lblDisplay.Text is "-")
+                if (lblDisplay.Text is "" || lblDisplay.Text is "-")
                 {
                     lblDisplay.Text = "0";
                 }
             }
+        }
+
+        private void btnmemory_Click(object sender, EventArgs e)
+        {
+            switch (((Button)sender).Text)
+            {
+                case "M+":
+                    memories += Convert.ToDouble(lblDisplay.Text);
+                    break;
+                case "M-":
+                    memories -= Convert.ToDouble(lblDisplay.Text);
+                    break;
+                case "MR":
+                    lblDisplay.Text = memories.ToString();
+                    break;
+                case "MC":
+                    memories = 0;
+                    break;
+                case "MS":
+                    memories = Convert.ToDouble(lblDisplay.Text);
+                    break;
+            }
+            isAfterEqual = true;
         }
     }
 }
