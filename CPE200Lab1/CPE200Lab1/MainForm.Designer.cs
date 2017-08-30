@@ -272,7 +272,7 @@
             this.btnPercent.TabIndex = 17;
             this.btnPercent.Text = "%";
             this.btnPercent.UseVisualStyleBackColor = true;
-            this.btnPercent.Click += new System.EventHandler(this.btnOperator_Click);
+            this.btnPercent.Click += new System.EventHandler(this.btnOpearatorplus_click);
             // 
             // btnClear
             // 
@@ -382,7 +382,7 @@
             this.SqrtBtn.TabIndex = 27;
             this.SqrtBtn.Text = "√";
             this.SqrtBtn.UseVisualStyleBackColor = true;
-            this.SqrtBtn.Click += new System.EventHandler(this.btnOperator_Click);
+            this.SqrtBtn.Click += new System.EventHandler(this.btnOpearatorplus_click);
             // 
             // OneOVXBtn
             // 
@@ -394,7 +394,7 @@
             this.OneOVXBtn.TabIndex = 29;
             this.OneOVXBtn.Text = "1/x";
             this.OneOVXBtn.UseVisualStyleBackColor = true;
-            this.OneOVXBtn.Click += new System.EventHandler(this.btnOperator_Click);
+            this.OneOVXBtn.Click += new System.EventHandler(this.btnOpearatorplus_click);
             // 
             // MainForm
             // 

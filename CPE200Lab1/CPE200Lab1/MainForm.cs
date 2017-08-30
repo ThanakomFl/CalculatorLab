@@ -18,6 +18,7 @@ namespace CPE200Lab1
         private bool isAfterEqual;
         private bool twotime;
         private string firstOperand;
+        private string operandplus;
         private string operate;
         private CalculatorEngine engine;
         private double memories;
@@ -70,7 +71,22 @@ namespace CPE200Lab1
             lblDisplay.Text += digit;
             isAfterOperater = false;
         }
-
+        private void btnOpearatorplus_click(object sender, EventArgs e)
+        {
+            switch (((Button)sender).Text)
+            {
+                case "1/x":
+                    lblDisplay.Text = (1 / Convert.ToDouble(lblDisplay.Text)).ToString();
+                    break;
+                case "√":
+                    lblDisplay.Text = (Math.Sqrt(Convert.ToDouble(lblDisplay.Text))).ToString();
+                    break;
+                case "%":
+                    lblDisplay.Text = (Convert.ToDouble(lblDisplay.Text) / 100).ToString();
+                    break;
+            }
+            isAllowBack = false;
+        }
         private void btnOperator_Click(object sender, EventArgs e)
         {
             if (lblDisplay.Text is "Error")
@@ -101,25 +117,11 @@ namespace CPE200Lab1
                     break;
                 case "x":
                     break;
-                case "1/x":
-                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
-                    break;
-                case "√":
-                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
-                    break;
                 case "÷":
                     isAfterOperater = true;
                     break;
-                case "%":
-                    lblDisplay.Text = engine.calculate(operate, firstOperand, "0");
-                    break;
             }
             isAllowBack = false;
-            if (operate == "√" || operate == "%" || operate == "1/x")
-            {
-                twotime = false;
-                isAfterEqual = true;
-            }
         }
 
         private void btnEqual_Click(object sender, EventArgs e)
