@@ -18,7 +18,6 @@ namespace CPE200Lab1
         private bool isAfterEqual;
         private bool twotime;
         private string firstOperand;
-        private string operandplus;
         private string operate;
         private CalculatorEngine engine;
         private double memories;
