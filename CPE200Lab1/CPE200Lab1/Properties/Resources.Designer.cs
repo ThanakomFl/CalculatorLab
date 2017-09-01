@@ -63,9 +63,29 @@ namespace CPE200Lab1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1180977498 {
+            get {
+                object obj = ResourceManager.GetObject("1180977498", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _12764558_958080540945906_5522883112111261843_o {
             get {
                 object obj = ResourceManager.GetObject("12764558_958080540945906_5522883112111261843_o", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _12916780_1715592072055884_6069719475224706155_o {
+            get {
+                object obj = ResourceManager.GetObject("12916780_1715592072055884_6069719475224706155_o", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

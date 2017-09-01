@@ -16,10 +16,11 @@ namespace CPE200Lab1
         private bool isAllowBack;
         private bool isAfterOperater;
         private bool isAfterEqual;
-        private bool twotime;
+        private bool twotimeop;
         private string firstOperand;
         private string operate;
         private CalculatorEngine engine;
+        private bool twotime;
         private double memories;
 
         private void resetAll()
@@ -29,7 +30,7 @@ namespace CPE200Lab1
             hasDot = false;
             isAfterOperater = false;
             isAfterEqual = false;
-            twotime = false;
+            twotimeop = false;
         }
 
         public MainForm()
@@ -53,9 +54,10 @@ namespace CPE200Lab1
             {
                 lblDisplay.Text = "0";
             }
-            if (twotime)
+            if (twotimeop)
             {
                 lblDisplay.Text = "0";
+                twotimeop = false;
             }
             if (lblDisplay.Text.Length is 8)
             {
@@ -103,9 +105,11 @@ namespace CPE200Lab1
                 operate = ((Button)sender).Text;
                 firstOperand = result;
                 lblDisplay.Text = result;
+                twotimeop = true;
                 return;
             }
             twotime = true;
+            twotimeop = true;
             operate = ((Button)sender).Text;
             firstOperand = lblDisplay.Text;
             switch (operate)
