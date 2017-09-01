@@ -19,6 +19,7 @@ namespace CPE200Lab1
         private bool twotimeop;
         private string firstOperand;
         private string operate;
+        private string operated;
         private CalculatorEngine engine;
         private bool twotime;
         private double memories;
@@ -90,6 +91,12 @@ namespace CPE200Lab1
         }
         private void btnOperator_Click(object sender, EventArgs e)
         {
+            string secondOperand = "0";
+            operate = ((Button)sender).Text;
+            if (((Button)sender).Text != "%")
+            {
+                operated = operate;
+            }
             if (lblDisplay.Text is "Error")
             {
                 return;
@@ -100,19 +107,32 @@ namespace CPE200Lab1
             }
             if (twotime)
             {
-                string secondOperand = lblDisplay.Text;
-                string result = engine.calculate(operate, firstOperand, secondOperand);
-                operate = ((Button)sender).Text;
+                Console.WriteLine(firstOperand);
+                Console.WriteLine(secondOperand);
+                if (((Button)sender).Text == "%")
+                {
+                    secondOperand = ((Convert.ToDouble(firstOperand) / 100) * Convert.ToDouble(lblDisplay.Text)).ToString();
+                    lblDisplay.Text = secondOperand;
+                }
+                if (((Button)sender).Text == "+")
+                {
+                    firstOperand = secondOperand;
+                }
+                Console.WriteLine(secondOperand);
+                Console.WriteLine(operated);
+                secondOperand = lblDisplay.Text;
+                string result = engine.calculate(operated, firstOperand, secondOperand);
                 firstOperand = result;
+                operate = ((Button)sender).Text;
                 lblDisplay.Text = result;
                 twotimeop = true;
+                secondOperand = "0";
                 return;
             }
             twotime = true;
             twotimeop = true;
-            operate = ((Button)sender).Text;
             firstOperand = lblDisplay.Text;
-            switch (operate)
+            switch (((Button)sender).Text)
             {
                 case "+":
                     break;
@@ -123,8 +143,13 @@ namespace CPE200Lab1
                 case "÷":
                     isAfterOperater = true;
                     break;
+                case "%":
+                    lblDisplay.Text = engine.calculate(operate, firstOperand, secondOperand);
+                    Console.WriteLine(operate);
+                    break;
             }
             isAllowBack = false;
+            Console.WriteLine((Button)sender);
         }
 
         private void btnEqual_Click(object sender, EventArgs e)
