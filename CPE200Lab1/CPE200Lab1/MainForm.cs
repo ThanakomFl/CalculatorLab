@@ -18,6 +18,7 @@ namespace CPE200Lab1
         private bool isAfterEqual;
         private string firstOperand;
         private string operate;
+        private string operated;
         private double memory;
         private CalculatorEngine engine;
 
@@ -79,9 +80,8 @@ namespace CPE200Lab1
             {
                 return;
             }
-            operate = ((Button)sender).Text;
-            firstOperand = lblDisplay.Text;
-            string result = engine.unaryCalculate(operate, firstOperand);
+            operated = ((Button)sender).Text;
+            string result = engine.unaryCalculate(operated, lblDisplay.Text);
             if (result is "E" || result.Length > 8)
             {
                 lblDisplay.Text = "Error";
@@ -90,11 +90,11 @@ namespace CPE200Lab1
             {
                 lblDisplay.Text = result;
             }
-
         }
 
         private void btnOperator_Click(object sender, EventArgs e)
         {
+            string secondOperand = null;
             if (lblDisplay.Text is "Error")
             {
                 return;
@@ -103,9 +103,9 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if(firstOperand != null)
+            if (firstOperand != null)
             {
-                string secondOperand = lblDisplay.Text;
+                secondOperand = lblDisplay.Text;
                 string result = engine.calculate(operate, firstOperand, secondOperand);
                 if (result is "E" || result.Length > 8)
                 {
@@ -127,7 +127,14 @@ namespace CPE200Lab1
                     isAfterOperater = true;
                     break;
                 case "%":
-                    // your code here
+                    if (secondOperand == null)
+                    {
+                        lblDisplay.Text = (Convert.ToDouble(lblDisplay.Text) / 100).ToString();
+                    }
+                    else
+                    {
+                        lblDisplay.Text = ((Convert.ToDouble(firstOperand) / 100) * Convert.ToDouble(secondOperand)).ToString();
+                    }
                     break;
             }
             isAllowBack = false;
@@ -264,6 +271,11 @@ namespace CPE200Lab1
                 return;
             }
             lblDisplay.Text = memory.ToString();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
