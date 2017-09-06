@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace CPE200Lab1
 {
@@ -90,6 +91,7 @@ namespace CPE200Lab1
                 }
                 return parts[0];
             }
+
 
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
