@@ -16,7 +16,8 @@ namespace CPE200Lab1
 
         private bool isOperator(string str)
         {
-            switch(str) {
+            switch (str)
+            {
                 case "+":
                 case "-":
                 case "X":
@@ -27,22 +28,69 @@ namespace CPE200Lab1
         }
         public string Process(string str)
         {
-            string result;
             string[] parts = str.Split(' ');
-            int i = 0;
-            Console.WriteLine(parts.Length);
-            while (parts.Length !=i)
+            string x;
+            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
             {
-                if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
-                {
-                    break;
-                }
-                else
-                {
-                    parts[3] = calculate(parts[1], parts[0], parts[2], 4);
-                }
+                return "E";
             }
-            return parts[3];
+            else
+            {
+                for (int j = 0; j < (parts.Length + 1) / 3; j++)
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        if (parts[i] == "÷")
+                        {
+                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                            parts[i + 1] = parts[i + 2];
+                            parts[i] = parts[i + 2] = " ";
+                            x = String.Join("", parts);
+                            parts = x.Split(' ');
+                        }
+                    }
+                for (int j = 0; j < (parts.Length + 1) / 3; j++)
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        if (parts[i] == "X")
+                        {
+                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                            parts[i + 1] = parts[i + 2];
+                            parts[i] = parts[i + 2] = " ";
+                            x = String.Join("", parts);
+                            parts = x.Split(' ');
+                        }
+                    }
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    if (parts[i] == "+")
+                    {
+                        parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                        parts[i + 1] = parts[i + 2];
+                        parts[i] = parts[i + 2] = " ";
+                        x = String.Join("", parts);
+                        parts = x.Split(' ');
+                        break;
+                    }
+                }
+                for (int j = 0; j < (parts.Length + 1) / 3; j++)
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        if (parts[i] == "-")
+                        {
+                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                            parts[i + 1] = parts[i + 2];
+                            parts[i] = parts[i + 2] = " ";
+                            x = String.Join("", parts);
+                            parts = x.Split(' ');
+                        }
+                    }
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    Console.WriteLine(parts[i] + " out");
+                }
+                return parts[0];
+            }
+
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
@@ -65,10 +113,10 @@ namespace CPE200Lab1
                         // calculate remaining space for fractional part.
                         remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
-                        return result.ToString("N" + remainLength);
+                        return result.ToString();
                     }
                 case "1/x":
-                    if(operand != "0")
+                    if (operand != "0")
                     {
                         double result;
                         string[] parts;
@@ -85,7 +133,7 @@ namespace CPE200Lab1
                         // calculate remaining space for fractional part.
                         remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
-                        return result.ToString("N" + remainLength);
+                        return result.ToString();
                     }
                     break;
             }
@@ -125,7 +173,11 @@ namespace CPE200Lab1
                     }
                     break;
                 case "%":
-                    break;
+                    if (firstOperand == "0")
+                    {
+                        return (Convert.ToDouble(secondOperand) / 100).ToString();
+                    }
+                    return (Convert.ToDouble(firstOperand) * (Convert.ToDouble(secondOperand) / 100)).ToString();
             }
             return "E";
         }
