@@ -43,10 +43,14 @@ namespace CPE200Lab1
                         if (parts[i] == "÷")
                         {
                             parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                            parts[i + 1] = parts[i + 2];
-                            parts[i] = parts[i + 2] = " ";
-                            x = String.Join("", parts);
-                            parts = x.Split(' ');
+                            if (parts.Length > 3)
+                            {
+                                parts[i + 1] = parts[i + 2];
+                                parts[i] = parts[i + 2] = " ";
+                                i = 0;
+                                x = String.Join("", parts);
+                                parts = x.Split(' ');
+                            }
                         }
                     }
                 for (int j = 0; j < (parts.Length + 1) / 3; j++)
@@ -55,10 +59,14 @@ namespace CPE200Lab1
                         if (parts[i] == "X")
                         {
                             parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                            parts[i + 1] = parts[i + 2];
-                            parts[i] = parts[i + 2] = " ";
-                            x = String.Join("", parts);
-                            parts = x.Split(' ');
+                            if (parts.Length > 3)
+                            {
+                                parts[i + 1] = parts[i + 2];
+                                parts[i] = parts[i + 2] = " ";
+                                i = 0;
+                                x = String.Join("", parts);
+                                parts = x.Split(' ');
+                            }
                         }
                     }
                 for (int i = 0; i < parts.Length; i++)
@@ -66,33 +74,35 @@ namespace CPE200Lab1
                     if (parts[i] == "+")
                     {
                         parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                        parts[i + 1] = parts[i + 2];
-                        parts[i] = parts[i + 2] = " ";
-                        x = String.Join("", parts);
-                        parts = x.Split(' ');
-                        break;
-                    }
-                }
-                for (int j = 0; j < (parts.Length + 1) / 3; j++)
-                    for (int i = 0; i < parts.Length; i++)
-                    {
-                        if (parts[i] == "-")
+                        if (parts.Length > 3)
                         {
-                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
                             parts[i + 1] = parts[i + 2];
                             parts[i] = parts[i + 2] = " ";
+                            i = 0;
                             x = String.Join("", parts);
                             parts = x.Split(' ');
                         }
                     }
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    Console.WriteLine(parts[i] + " out");
                 }
+                for (int j = 0; j < (parts.Length + 1) / 3; j++)
+                    for (int i = 0; i < parts.Length; i++)
+                    { 
+                        if (parts[i] == "-")
+                        {
+                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                            if (parts.Length > 3)
+                            {
+                                parts[i + 1] = parts[i + 2];
+                                parts[i] = parts[i + 2] = " ";
+                                i = 0;
+                                x = String.Join("", parts);
+                                parts = x.Split(' ');
+                            }
+                        }
+                        Console.WriteLine(parts[0]);
+                    }
                 return parts[0];
             }
-
-
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
