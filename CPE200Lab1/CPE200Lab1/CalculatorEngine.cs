@@ -45,11 +45,14 @@ namespace CPE200Lab1
                             parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
                             if (parts.Length > 3)
                             {
-                                parts[i + 1] = parts[i + 2];
-                                parts[i] = parts[i + 2] = " ";
+                                parts[i] = parts[i+1] = " ";
                                 i = 0;
                                 x = String.Join("", parts);
                                 parts = x.Split(' ');
+                                if (parts[i] != "÷")
+                                {
+                                    continue;
+                                }
                             }
                         }
                     }
@@ -61,11 +64,15 @@ namespace CPE200Lab1
                             parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
                             if (parts.Length > 3)
                             {
-                                parts[i + 1] = parts[i + 2];
-                                parts[i] = parts[i + 2] = " ";
+                                parts[i] = parts[i + 1] = " ";
                                 i = 0;
                                 x = String.Join("", parts);
                                 parts = x.Split(' ');
+                                if (parts[i] != "÷")
+                                {
+                                    Console.WriteLine(parts[i]);
+                                    continue;
+                                }
                             }
                         }
                     }
@@ -73,14 +80,19 @@ namespace CPE200Lab1
                 {
                     if (parts[i] == "+")
                     {
+                        Console.WriteLine(parts.Length);
                         parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
+                        Console.WriteLine(parts.Length);
                         if (parts.Length > 3)
                         {
-                            parts[i + 1] = parts[i + 2];
-                            parts[i] = parts[i + 2] = " ";
+                            parts[i] = parts[i + 1] = " ";
                             i = 0;
                             x = String.Join("", parts);
                             parts = x.Split(' ');
+                            if (parts[i] != "÷")
+                            {
+                                continue;
+                            }
                         }
                     }
                 }
@@ -92,14 +104,16 @@ namespace CPE200Lab1
                             parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
                             if (parts.Length > 3)
                             {
-                                parts[i + 1] = parts[i + 2];
-                                parts[i] = parts[i + 2] = " ";
+                                parts[i] = parts[i + 1] = " ";
                                 i = 0;
                                 x = String.Join("", parts);
                                 parts = x.Split(' ');
+                                if (parts[i] != "÷")
+                                {
+                                    continue;
+                                }
                             }
                         }
-                        Console.WriteLine(parts[0]);
                     }
                 return parts[0];
             }
