@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
 
 namespace CPE200Lab1
 {
@@ -17,8 +16,7 @@ namespace CPE200Lab1
 
         private bool isOperator(string str)
         {
-            switch (str)
-            {
+            switch(str) {
                 case "+":
                 case "-":
                 case "X":
@@ -27,96 +25,30 @@ namespace CPE200Lab1
             }
             return false;
         }
+
         public string Process(string str)
         {
-            string[] parts = str.Split(' ');
-            string x;
-            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
+            //Split input string to multiple parts by space
+            List<string> parts = str.Split(' ').ToList<string>();
+            string result;
+            //As long as we have more than one part
+            while(parts.Count > 1)
             {
-                return "E";
-            }
-            else
-            {
-                for (int j = 0; j < (parts.Length + 1) / 3; j++)
-                    for (int i = 0; i < parts.Length; i++)
-                    {
-                        if (parts[i] == "÷")
-                        {
-                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                            if (parts.Length > 3)
-                            {
-                                parts[i] = parts[i+1] = " ";
-                                i = 0;
-                                x = String.Join("", parts);
-                                parts = x.Split(' ');
-                                if (parts[i] != "÷")
-                                {
-                                    continue;
-                                }
-                            }
-                        }
-                    }
-                for (int j = 0; j < (parts.Length + 1) / 3; j++)
-                    for (int i = 0; i < parts.Length; i++)
-                    {
-                        if (parts[i] == "X")
-                        {
-                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                            if (parts.Length > 3)
-                            {
-                                parts[i] = parts[i + 1] = " ";
-                                i = 0;
-                                x = String.Join("", parts);
-                                parts = x.Split(' ');
-                                if (parts[i] != "÷")
-                                {
-                                    Console.WriteLine(parts[i]);
-                                    continue;
-                                }
-                            }
-                        }
-                    }
-                for (int i = 0; i < parts.Length; i++)
+                //Check if the first three is ready for calcuation
+                if(!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
                 {
-                    if (parts[i] == "+")
-                    {
-                        Console.WriteLine(parts.Length);
-                        parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                        Console.WriteLine(parts.Length);
-                        if (parts.Length > 3)
-                        {
-                            parts[i] = parts[i + 1] = " ";
-                            i = 0;
-                            x = String.Join("", parts);
-                            parts = x.Split(' ');
-                            if (parts[i] != "÷")
-                            {
-                                continue;
-                            }
-                        }
-                    }
+                    return "E";
+                } else
+                {
+                    //Calculate the first three
+                    result = calculate(parts[1], parts[0], parts[2], 4);
+                    //Remove the first three
+                    parts.RemoveRange(0, 3);
+                    // Put back the result
+                    parts.Insert(0, result);
                 }
-                for (int j = 0; j < (parts.Length + 1) / 3; j++)
-                    for (int i = 0; i < parts.Length; i++)
-                    { 
-                        if (parts[i] == "-")
-                        {
-                            parts[i - 1] = calculate(parts[i], parts[i - 1], parts[i + 1], 4);
-                            if (parts.Length > 3)
-                            {
-                                parts[i] = parts[i + 1] = " ";
-                                i = 0;
-                                x = String.Join("", parts);
-                                parts = x.Split(' ');
-                                if (parts[i] != "÷")
-                                {
-                                    continue;
-                                }
-                            }
-                        }
-                    }
-                return parts[0];
             }
+            return parts[0];
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
@@ -139,10 +71,10 @@ namespace CPE200Lab1
                         // calculate remaining space for fractional part.
                         remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
-                        return result.ToString();
+                        return result.ToString("N" + remainLength);
                     }
                 case "1/x":
-                    if (operand != "0")
+                    if(operand != "0")
                     {
                         double result;
                         string[] parts;
@@ -159,7 +91,7 @@ namespace CPE200Lab1
                         // calculate remaining space for fractional part.
                         remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
-                        return result.ToString();
+                        return result.ToString("N" + remainLength);
                     }
                     break;
             }
@@ -199,11 +131,8 @@ namespace CPE200Lab1
                     }
                     break;
                 case "%":
-                    if (firstOperand == "0")
-                    {
-                        return (Convert.ToDouble(secondOperand) / 100).ToString();
-                    }
-                    return (Convert.ToDouble(firstOperand) * (Convert.ToDouble(secondOperand) / 100)).ToString();
+                    //your code here
+                    break;
             }
             return "E";
         }
