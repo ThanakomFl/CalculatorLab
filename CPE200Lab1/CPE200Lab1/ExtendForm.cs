@@ -63,8 +63,11 @@ namespace CPE200Lab1
             isNumberPart = false;
             isContainDot = false;
             string current = lblDisplay.Text;
+            if (current[current.Length - 1] != ' ' || isOperator(current[current.Length - 2]))
+            {
                 lblDisplay.Text += " " + ((Button)sender).Text + " ";
                 isSpaceAllowed = false;
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -98,13 +101,16 @@ namespace CPE200Lab1
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
-            string result = engine.RPNProcess(lblDisplay.Text);
+            string result = engine.Process(lblDisplay.Text);
             if (result is "E")
             {
                 lblDisplay.Text = "Error";
             } else
             {
                 lblDisplay.Text = result;
+                isSpaceAllowed = true;
+                isContainDot = false;
+                isNumberPart = true;
             }
         }
 
@@ -142,10 +148,12 @@ namespace CPE200Lab1
             {
                 return;
             }
-
+            if(!isContainDot)
+            {
                 isContainDot = true;
                 lblDisplay.Text += ".";
                 isSpaceAllowed = false;
+            }
         }
 
         private void btnSpace_Click(object sender, EventArgs e)
