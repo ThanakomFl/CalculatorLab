@@ -26,6 +26,15 @@ namespace CPE200Lab1
             return false;
         }
 
+        protected bool isblank(string str)
+        {
+            if(str == " ")
+            {
+                return true;
+            }
+            return false;
+        }
+
         public string Process(string str)
         {
             //Split input string to multiple parts by space
@@ -119,13 +128,13 @@ namespace CPE200Lab1
                         result = (Convert.ToDouble(firstOperand) / Convert.ToDouble(secondOperand));
                         // split between integer part and fractional part
                         parts = result.ToString().Split('.');
+                        remainLength = maxOutputSize - parts[0].Length -1;
                         // if integer part length is already break max output, return error
                         if (parts[0].Length > maxOutputSize)
                         {
                             return "E";
                         }
                         // calculate remaining space for fractional part.
-                        remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
                         return result.ToString("N" + remainLength);
                     }
