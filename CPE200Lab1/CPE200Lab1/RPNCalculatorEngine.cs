@@ -22,6 +22,10 @@ namespace CPE200Lab1
                     }
                     if (isOperator(parts[i]))
                     {
+                        if(myStack.Count < 2)
+                        {
+                        return "Error";
+                        }
                         operand = parts[i];
                         second = myStack.Pop().ToString();
                         first = myStack.Pop().ToString();
