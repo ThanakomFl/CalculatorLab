@@ -20,7 +20,7 @@ namespace CPE200Lab1
                     return (Convert.ToDouble(firstOperand) * Convert.ToDouble(secondOperand)).ToString();
                 case "%":
                     if (secondOperand == "0")
-                        return (Convert.ToDouble(firstOperand) / 100).ToString();
+                        return (Convert.ToDouble(firstOperand) / 100).ToString();   
                     break;
                 case "÷":
                     // Not allow devide be zero
